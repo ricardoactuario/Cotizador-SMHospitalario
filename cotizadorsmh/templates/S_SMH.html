@@ -1,0 +1,94 @@
+{% extends 'layouts/base1.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<div id="seccion1">
+    <div id="parte1">
+        <div id="contenedorprincipal">
+            <img id="imagenSeguroTAR" src="{% static 'STAR.png' %}" alt="imagenSTAR">
+            <h3 id="titleimg">Seguro de Gastos Médicos Individual</h3>
+            <div id="recip1">
+                <p class="recipiente1">El Seguro de Gastos Médicos Individual tiene como finalidad, cubrir los gastos por la atención médica hospitalaria originada por un accidente o una enfermedad; el seguro contiene distintos planes y múltiples beneficios adicionales, con coberturas a Nivel Mundial o Centroamérica.</p>
+            </div>
+            <div id="recip3">
+                <h2 id="cob">Máximos Vitalicios:</h2>
+                <div class="recipe2">
+                    <li class="subrecipe2">Cobertura Centroamérica de $50,000</li>
+                    <li class="subrecipe2">Cobertura Centroamérica de $100,000</li>
+                    <li class="subrecipe2">Cobertura Mundial de $250,000</li>
+                    <li class="subrecipe2">Cobertura Mundial de $500,000</li>
+                    <li class="subrecipe2">Cobertura Mundial de $1,000,000</li>
+                </div>
+            </div>
+        </div>
+        <div id="hd">
+            <div>
+                <img id="igm" src="{% static 'atlanv.png' %}" alt="imagenatlanv">
+            </div>
+            <form id="fm" method="POST">
+                {% csrf_token %}
+                <h2 id="texto">Llenar los campos de Intermediario, si aplica:</h2>
+                <div id="form1">{{form_intermediario2}}</div>
+                <h2 id="texto2">Llenar los datos para la cotización:</h2>
+                <div id="form2">{{form_CotizadorTAR}}</div>
+                <h2 id="texto3">Llenar información de Conyugue, si aplica:</h2>
+                <div id="form3">{{form_Conyuge}}</div>
+                <button id="boton1">
+                    Cotizar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <!-- Al final del archivo HTML -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('fm').addEventListener('submit', function (event) {
+            if (!validarDatos()) {
+                event.preventDefault();
+                alert('Ingresaste un Dato que no aplica o que no es válido, por favor revisa la Fecha de Nacimiento.');
+            }
+        });
+        function validarDatos() {
+            var nac = document.getElementById('id_Nac').value;
+            var nac2 = document.getElementById('id_Nac2').value;
+
+            if (!esFechaValida(nac) || !esFechaValida2(nac2) || !esEdadValida(nac)) {
+                return false;  // Datos no válidos
+            }
+            
+            return true;  // Datos válidos
+        }
+        function esFechaValida(fecha) {
+            // Verifica si la fecha tiene el formato YYYY/MM/DD
+            var regexFecha = /^\d{4}\/\d{2}\/\d{2}$/;
+            return regexFecha.test(fecha) && !isNaN(Date.parse(fecha));
+        }
+        function esFechaValida2(fecha) {
+            if (fecha.trim() === "") {
+                return true;
+            }
+            // Verifica si la fecha tiene el formato YYYY/MM/DD
+            var regexFecha = /^\d{4}\/\d{2}\/\d{2}$/;
+            return regexFecha.test(fecha) && !isNaN(Date.parse(fecha));
+        }
+        function esEdadValida(fecha) {
+            var edad = calcularEdad(fecha);
+            return 18 <= edad && edad <= 75;
+        }
+        function calcularEdad(fecha) {
+            var fechaNacimiento = new Date(fecha);
+            var hoy = new Date();
+            var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+            var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                edad--;
+            }
+            return edad;
+        }
+    });
+</script>
+{% endblock %}

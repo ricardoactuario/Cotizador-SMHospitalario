@@ -1,0 +1,48 @@
+{% extends 'layouts/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+<div id="section_oferta">
+    <!-- Contenido de la oferta con variables de Django -->
+    <h1 id="titulo_cotizacion" >Se ha realizado su cotización de manera exitosa</h1>
+    <img id="imgn1" src="{% static 'check.png' %}" alt="imgcheck">
+    <h3 id="subtitulo_cotizacion">Presentamos nuestra oferta del Seguro de Gastos Médicos Individual de acuerdo a sus datos:</h3>
+    <embed id="pdfViewer" src="data:application/pdf;base64,{{pdf_base64}}" type="application/pdf">
+    <h3 id="formulario_subtitulo2">Hemos enviado un correo con la presente cotización. Cualquier duda o consulta, puedes contactarnos a través de nuestros medios, será un gusto atenderte</h3>
+    <h2 id="email">Correo: aseguradoatlantida@seatlan.sv</h2>
+    <h2 id="telefon">Tel: 2283-0800</h2>
+    <hr id="linea2">
+    <h3 id="formulario_subtitulo3">Envíanos tus consultas y comentarios:</h3>
+    <img id="imgformulario" src="{% static 'formulario.png' %}" alt="iconoformulario">
+    <div id="formulario">
+        <a href="https://www.segurosatlantida.com.sv/contactanos" target="_blank"><button id="botonformulario">Consultas</button></a>
+    </div>
+    <!--<section id="parte3" >
+        <div id="caja">
+            <p id="cuadro2" >En Seguros Atlántida, estamos comprometidos con brindarte el mejor servicio posible. Si tienes una consulta, no dudes contactarnos a traves de los distintos medios:</p>
+            <p class="titulo2">
+                <img id="imgmail" src="{% static 'mail.PNG' %}" alt="">     Consulta en línea:
+            </p>
+                <li class="recipiente2">
+                    <a id="dud" href="https://www.segurosatlantida.com.sv/contactanos" target="_blank">Servicio de Consulta</a>
+                </li>
+                <li class="recipiente2">
+                    <h2 class="subtitulo">aseguradoatlantida@seatlan.sv</h2>
+                </li>
+            <p class="titulo2">
+                <img id="imgtel" src="{% static 'telefono.PNG' %}" alt="">     Llamada Telefónica al:
+            </p>
+                <li class="recipiente2">
+                    <h2 class="subtitulo">(+503)2283-0800</h2>
+                </li>
+            <p class="titulo2">
+                <img id="imgub" src="{% static 'ubicacion.PNG' %}" alt="">     Visitanos:
+            </p>
+                <li class="recipiente2">
+                    <h2 class="subtitulo">Calle La Mascota #930, Colonia Maquilishuat, San Salvador</h2>
+                </li>
+        </div>
+    </section>-->
+</div>
+{% endblock %}
